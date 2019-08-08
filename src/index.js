@@ -18,7 +18,10 @@ console.log('server start');
 
 const forward2Local =  (data) => {
   return async (ctx, next) => {
-    //console.log(ctx.request);
+    console.log('ctx.request.body');
+    console.log(ctx.request.body);
+    console.log('ctx.request');
+    console.log(ctx.request);
     //console.log('forward2Local');
     //console.log('receive request query:', ctx.request.query);
     //console.log(`Request Body: ${JSON.stringify(ctx.request.body)}`);
