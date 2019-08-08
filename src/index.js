@@ -23,7 +23,7 @@ const forward2Local =  (data) => {
     //console.log('receive request query:', ctx.request.query);
     //console.log(`Request Body: ${JSON.stringify(ctx.request.body)}`);
 
-    io.broadcast( 'message' , { query: ctx.request.query, body: ctx.request.body  } );
+    io.broadcast( 'message' , { query: JSON.stringify(ctx.request.query), body: JSON.stringify(ctx.request.body)  } );
 
     ctx.set('Content-Type', 'text/plain');
     ctx.status = 200;
