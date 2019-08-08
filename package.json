@@ -21,6 +21,7 @@
     "engine.io-client": "^3.3.2",
     "install": "^0.13.0",
     "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
     "koa-router": "^7.4.0",
     "koa-socket": "^4.4.0",
     "npm": "^6.10.3",

@@ -1,6 +1,8 @@
 const Koa = require('koa');
 const app = new Koa();
 
+const koaBody = require('koa-body');
+
 const Router = require('koa-router');
 const router = new Router();
 
@@ -18,7 +20,7 @@ const forward2Local =  (data) => {
   return async (ctx, next) => {
     console.log('forward2Local');
     console.log('receive request query:', ctx.request.query);
-    console.log('receive request body:', ctx.request.body);
+    console.log(`Request Body: ${JSON.stringify(ctx.request.body)}`);
 
     io.broadcast( 'message' , { body: ctx.request.body  } );
 
@@ -33,8 +35,8 @@ const forward2Local =  (data) => {
 // proxy 設定 (HTTP → socket.io)
 //-------------------------------------------------------
 // /engine
-router.post('/', forward2Local() );
-router.post('/message', forward2Local() );
+router.post('/', koaBody(), forward2Local() );
+router.post('/message', koaBody(), forward2Local() );
 router.get('/', forward2Local() );
 // router.get('/abc', forward2Local() );
 
