@@ -18,13 +18,6 @@ console.log('server start');
 
 const forward2Local =  (data) => {
   return async (ctx, next) => {
-    //console.log('ctx.request.body');
-    //console.log(ctx.request.body);
-    //console.log('ctx.request');
-    //console.log(ctx.request);
-    //console.log('forward2Local');
-    //console.log('receive request query:', ctx.request.query);
-    //console.log(`Request Body: ${JSON.stringify(ctx.request.body)}`);
 
     io.broadcast( 'message' , {
       query: JSON.stringify(ctx.request.query),
@@ -39,20 +32,20 @@ const forward2Local =  (data) => {
 
 };
 
-//-------------------------------------------------------
-// proxy 設定 (HTTP → socket.io)
-//-------------------------------------------------------
-// /engine
+const checkStatus = () => {
+  ctx.set('Content-Type', 'text/plain');
+  ctx.status = 200;
+  ctx.body = 'Server Working...';
+};
+
 router.post('/', koaBody(), forward2Local() );
 router.post('/message', koaBody(), forward2Local() );
-router.get('/', forward2Local() );
-// router.get('/abc', forward2Local() );
+router.get('/', checkStatus() );
 
-//app.io.on( event, eventHandler );
 
 app.io.on( 'join', ( ctx, data ) => {
   console.log( 'join event fired', data )
-})
+});
 
 app.io.on( 'connection', socket => {
   console.log('connected');
