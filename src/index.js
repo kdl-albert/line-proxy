@@ -29,7 +29,14 @@ const forward2Local = (data) => {
     ctx.status = 200;
     ctx.body = 'OK';
   }
+};
 
+const forwardHtml2Local = () => {
+  return async (ctx, next) => {
+    ctx.set('Content-Type', 'text/plain');
+    ctx.status = 200;
+    ctx.body = JSON.stringify(ctx);
+  };
 };
 
 const checkStatus = () => {
@@ -42,6 +49,7 @@ const checkStatus = () => {
 
 router.post('/', koaBody(), forward2Local());
 router.post('/message', koaBody(), forward2Local());
+router.get('/downloaded', forwardHtml2Local());
 router.get('/', checkStatus());
 
 
