@@ -49,7 +49,8 @@ const checkStatus = () => {
 
 router.post('/', koaBody(), forward2Local());
 router.post('/message', koaBody(), forward2Local());
-router.get('/downloaded', forwardHtml2Local());
+router.get('/downloaded/', forwardHtml2Local());
+router.get('/^\/aaaa\/$/', forwardHtml2Local());
 router.get('/', checkStatus());
 
 
